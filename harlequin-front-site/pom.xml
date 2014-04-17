@@ -1,31 +1,76 @@
 <?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <artifactId>harlequin</artifactId>
-    <groupId>com.monstarlab.taito.hq</groupId>
-    <version>1.0-SNAPSHOT</version>
-  </parent>
-  <artifactId>harlequin-front-site</artifactId>
-  <packaging>war</packaging>
-  <name>harlequin-front-site Maven Webapp</name>
-  <url>http://maven.apache.org</url>
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-    
-    <dependency>
-        <groupId>com.monstarlab.taito.hq</groupId>
-        <artifactId>harlequin-service</artifactId>
-        <version>1.0-SNAPSHOT</version>
-    </dependency>    
-  </dependencies>
-  <build>
-    <finalName>harlequin-front-site</finalName>
-  </build>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>harlequin</artifactId>
+		<groupId>com.monstarlab.taito.hq</groupId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>harlequin-front-site</artifactId>
+	<packaging>war</packaging>
+	<name>harlequin-front-site Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.monstarlab.taito.hq</groupId>
+			<artifactId>harlequin-service</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<finalName>harlequin-front-site</finalName>
+		<resources>
+			<resource>
+				<directory>src/main/resources/</directory>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<!-- it's one built-in maven plugin, so it's no need to groupId -->
+				<!-- <groupId>org.apache.maven.plugins</groupId> -->
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<!-- see details: http://maven.apache.org/plugins/maven-war-plugin/war-mojo.html 
+						http://maven.apache.org/plugins/maven-war-plugin/exploded-mojo.html http://maven.apache.org/plugins/maven-war-plugin/inplace-mojo.html 
+						http://maven.apache.org/plugins/maven-war-plugin/manifest-mojo.html -->
+					<warName>${project.build.finalName}</warName>
+					<warSourceDirectory>src/main/webapp</warSourceDirectory>
+					<webResources>
+						<resource>
+							<!-- this is relative to the pom.xml directory -->
+							<directory>${project.build.directory}/${project.build.finalName}/</directory>
+							<!-- avoid the maven-war-plugin to override the minify files(.js, 
+								.css) compressed by the maven-yuicompressor-plugin -->
+							<excludes>
+								<exclude>*.js</exclude>
+								<exclude>*.css</exclude>
+							</excludes>
+						</resource>
+					</webResources>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

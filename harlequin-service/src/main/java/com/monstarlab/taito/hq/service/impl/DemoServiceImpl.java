@@ -26,5 +26,5 @@ public class DemoServiceImpl {
 		demo.setUserName("123");
 		demo.setPassword("123");
 		demoRepository.save(demo);
-	} 
+	}
 }
