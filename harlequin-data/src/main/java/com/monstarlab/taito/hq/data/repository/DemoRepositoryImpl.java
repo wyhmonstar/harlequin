@@ -22,7 +22,7 @@ public class DemoRepositoryImpl implements DemoRepositoryCustom {
 	public List<Demo> getDemos() {
 		String sql = "select id,user_name as userName,password from demo";
 		SQLQuery query = em.createNativeQuery(sql).unwrap(SQLQuery.class);
-		query.addScalar("id", LongType.INSTANCE).addScalar("userName",StringType.INSTANCE).addScalar("passworld",StringType.INSTANCE).setResultTransformer(
+		query.addScalar("id", LongType.INSTANCE).addScalar("userName",StringType.INSTANCE).addScalar("password",StringType.INSTANCE).setResultTransformer(
 				Transformers.aliasToBean(Demo.class));
 		return (List<Demo>)query.list();
 	}
