@@ -1,14 +1,12 @@
 package com.monstarlab.taito.hq.controller;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.monstarlab.taito.hq.data.domain.Demo;
 import com.monstarlab.taito.hq.service.impl.DemoServiceImpl;
 
 @Controller
@@ -23,8 +21,9 @@ public class DemoController {
     }
     
     @RequestMapping(value = "test", method = RequestMethod.GET)
-    public List<Demo> name() {
+    public String name(Model model) {
     	demoService.modifyDemo();
-		return demoService.queryDemo();
+    	model.addAttribute("users", demoService.queryDemo());
+		return "test";
 	}
 }

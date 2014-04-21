@@ -7,7 +7,7 @@
 	<persistence-unit name="spring-jpa" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<!-- 将子模块中的@Entity添加进来 -->
-		<jar-file>lib/harlequin-data-1.0-SNAPSHOT.jar</jar-file>
+		<jar-file>lib/harlequin-data-1.0.0-SNAPSHOT.jar</jar-file>
 		<properties>
 			<!--配置Hibernate方言 -->
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
