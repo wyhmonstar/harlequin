@@ -33,9 +33,7 @@
 	</bean>
 
 	<!-- 配置Spring Data JPA扫描目录 -->
-	<jpa:repositories base-package="com.monstarlab.taito.hq.data.repository"
-		entity-manager-factory-ref="entityManagerFactory"
-		transaction-manager-ref="transactionManager" />
+	<jpa:repositories base-package="com.monstarlab.taito.hq.data.repository" entity-manager-factory-ref="entityManagerFactory" transaction-manager-ref="transactionManager" />
 
 	<!-- 配置事务管理器 -->
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
